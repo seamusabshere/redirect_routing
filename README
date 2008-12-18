@@ -9,7 +9,7 @@ This will make the root of your site redirect to the events controller, typicall
 
 You can redirect any URL to any set of options, or event a string URL, like this:
 
-    map.redirect 'test', 'http://pinds.com'
+    map.redirect 'test', 'http://example.com'
     
 GET /test, and you'll be redirected to my blog.
 
@@ -18,7 +18,10 @@ You can also set the status to be a 301 permanent redirect instead of a temporar
     map.redirect 'oldurl', 'newurl', :permament => true
     map.redirect 'oldurl', :controller => 'new_controller', :action => 'new_action', :permament => true
 
+Finally you can preserve wildcard paths
 
+    map.redirect 'festivals/*path', 'http://example.com/events/festivals', :keep_path => :path
+    map.redirect 'news/*articles', 'http://blog.example.com', :keep_path => :articles
 
 Motivation
 ----------
@@ -46,6 +49,8 @@ http://pinds.com
 
 Changelog
 ---------
+
+* Added :keep_path options [Seamus Abshere & Manfred Stienstra]
 * Updated to Rails Edge [Manfred Stienstra]
 * Support for 301 redirects [Gioele Barabucci]
 * Silence warning about missing helper [Tim Connor]
