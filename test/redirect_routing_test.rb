@@ -5,7 +5,8 @@ end
 ActionController::Routing::Routes.add_route('/:controller/:action/:id')
 
 class RedirectRoutingTest < TestCase
-
+  tests RedirectRoutingController
+  
   def setup
     @controller = RedirectRoutingController.new
     @request    = ActionController::TestRequest.new
@@ -53,8 +54,9 @@ class RedirectRoutingTest < TestCase
   end
   
   def test_redirect_controller_with_hash_and_append_path
-    get :redirect, :args => [{ :controller => "events", :keep_path => :path }], :path => [ "festivals/recent" ]
-    assert_response 500
+    assert_raises(ArgumentError) do
+      get :redirect, :args => [{ :controller => "events", :keep_path => :path }], :path => [ "festivals/recent" ]
+    end
   end
   
   def test_redirect_controller_with_string_and_append_path
@@ -70,8 +72,9 @@ class RedirectRoutingTest < TestCase
   end
   
   def test_permanent_redirect_controller_with_hash_and_append_path
-    get :redirect, :args => [{ :controller => "events", :permanent => true, :keep_path => :path }], :path => [ "festivals/recent" ]
-    assert_response 500
+    assert_raises(ArgumentError) do
+      get :redirect, :args => [{ :controller => "events", :permanent => true, :keep_path => :path }], :path => [ "festivals/recent" ]
+    end
   end
   
   def test_permanent_redirect_controller_with_string_and_append_path
