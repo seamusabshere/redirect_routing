@@ -1,6 +1,8 @@
 RedirectRouting
 ===============
 
+Forked by Seamus Abshere (seamus@abshere.net)
+
 This plugin lets you do simple redirects straight from your routes.rb file:
 
     map.redirect '', :controller => 'events'
