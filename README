@@ -3,6 +3,12 @@ RedirectRouting
 
 Forked by Seamus Abshere (seamus@abshere.net)
 
+Note: you may have to put
+
+    ActionController::Routing::RouteSet::Mapper.send :include, RedirectRouting::Routes
+
+at the top of config/routes.rb.
+
 This plugin lets you do simple redirects straight from your routes.rb file:
 
     map.redirect '', :controller => 'events'
