@@ -6,7 +6,9 @@ class RedirectRoutingController < ActionController::Base
     
     if path_to_keep = options[:keep_path] and !params[path_to_keep].blank?
       raise ArgumentError, "Redirect target should be a String when using the :keep_path option" unless url_options.is_a?(String)
-      url_options = URI.join(url_options, params[path_to_keep].join('/')).to_s
+      parsed_url = URI.parse(url_options)
+      parsed_url.path = ([parsed_url.path] + params[path_to_keep]).join('/')
+      url_options = parsed_url.to_s
     end
     
     redirect_to url_options, :status => status
